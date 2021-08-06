@@ -1,7 +1,7 @@
 // Write your "actions" router here!
 const express = require('express');
 const router = express.Router();
-const Actions = require('./actions-model');
+const {get, insert, update, remove} = require('./actions-model');
 const custom = require('./actions-middlware')
 
 router.get('/', () => {
@@ -11,7 +11,7 @@ router.get('/', () => {
 router.get('/:id', async (req, res) => {
     const id = req.params.id
     console.log("id", id)
-    const action = await Actions.get(id)
+    const action = await get(id)
     if(!action) {
         return res.status(404)
     }
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', custom.requiredBody, async (req, res) => {
-    const action = await Actions.insert(req.body)
+    const action = await insert(req.body)
     if(!action) {
         return res.status(404)
     } 
@@ -28,7 +28,7 @@ router.post('/', custom.requiredBody, async (req, res) => {
 
 router.put('/:id', custom.requiredBody, async (req, res) => {
     const id = req.params.id;
-    const updatedAction = await Actions.update(id, req.body);
+    const updatedAction = await update(id, req.body);
     if(updatedAction) {
         return updatedAction;
     } else {
@@ -38,9 +38,9 @@ router.put('/:id', custom.requiredBody, async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const id = req.params.id
-    const action = await Actions.get(id)
+    const action = await get(id)
     if(action) {
-        Actions.remove(id)
+        remove(id)
     } else {
         return res.status(404)
     }
