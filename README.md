@@ -16,7 +16,7 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 
 ## Instructions
 
-### Task 1: Project Set Up
+### Task 1: Project Set Up - DONE
 
 - [ ] Run `npm install` to install your dependencies.
 - [ ] Run tests locally executing `npm test`.
